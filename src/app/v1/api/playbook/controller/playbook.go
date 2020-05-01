@@ -34,11 +34,11 @@ func (ctrl *PlaybookController) Playbook(context *gin.Context) {
 		rest.ResponseMessages(context, http.StatusBadRequest, "Bad Request")
 		return
 	}
-	err := ctrl.Service.PlaybookService(params.Apps, params.Connection, params.Inventory)
+	result, err := ctrl.Service.PlaybookService(params)
 	if err != nil {
 		rest.ResponseMessages(context, http.StatusInternalServerError, err.Error())
 		return
 	}
-	rest.ResponseMessages(context, http.StatusOK, "Playbook Execute")
+	rest.ResponseMessages(context, http.StatusOK, result)
 	return
 }
