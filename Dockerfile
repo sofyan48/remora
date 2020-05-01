@@ -10,4 +10,5 @@ RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main -ldflags '-w -s' src/
 ############################
 FROM scratch
 
-COPY --from=builder /app /usr/bin
+COPY --from=builder /app/main /usr/bin
+COPY --from=builder /app /app
