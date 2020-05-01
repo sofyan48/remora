@@ -28,7 +28,7 @@ func (service *PlaybookService) PlaybookService(app, conn, inventory string) err
 	connection := service.Ansible.SetConn(conn)
 	invent := service.Ansible.SetInventory(inventory)
 	playbookStorage := os.Getenv("PLAYBOOK_PATH")
-	playbookPath := playbookStorage + "/" + app
+	playbookPath := playbookStorage + "/" + app + "/main.yml"
 	err := service.Ansible.Execute(connection, invent, playbookPath, "Runn Example")
 	return err
 }

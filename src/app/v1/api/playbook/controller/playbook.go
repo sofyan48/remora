@@ -39,6 +39,6 @@ func (ctrl *PlaybookController) Playbook(context *gin.Context) {
 		rest.ResponseMessages(context, http.StatusInternalServerError, err.Error())
 		return
 	}
-	rest.ResponseData(context, http.StatusOK, "Playbook Executor")
+	rest.ResponseMessages(context, http.StatusOK, "Playbook Execute")
 	return
 }

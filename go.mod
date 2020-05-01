@@ -7,7 +7,7 @@ require (
 	github.com/Shopify/sarama v1.26.1
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/apache/thrift v0.13.0 // indirect
-	github.com/apenella/go-ansible v0.3.1 // indirect
+	github.com/apenella/go-ansible v0.3.1
 	github.com/apenella/go-common-utils v0.1.1 // indirect
 	github.com/gin-gonic/gin v1.5.0
 	github.com/google/uuid v1.1.1
