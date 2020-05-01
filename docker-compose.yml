@@ -1,7 +1,7 @@
 version: '3'
 services: 
     remora:
-        build: .
+        image: meongbego/remora 
         restart: always
         ports:
             - 80:80
@@ -11,7 +11,9 @@ services:
             - SERVER_TIMEZONE=Asia/Jakarta
             - APP_NAME=remora
             - SWAGGER_SERVER_ADDRESS=http://0.0.0.0
-            - PLAYBOOK_PATH=playbook
+            - PLAYBOOK_PATH=/app/playbook
+        volumes: 
+            - ./playbook:/app/playbook
         command: /usr/bin/main -e production
 
   
