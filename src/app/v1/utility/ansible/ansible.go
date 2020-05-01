@@ -14,6 +14,10 @@ func AnsbileLibraryHandler() *AnsbileLibrary {
 
 // AnsbileLibraryInterface ...
 type AnsbileLibraryInterface interface {
+	SetConn(conn string) *ansibler.AnsiblePlaybookConnectionOptions
+	SetInventory(inventory string) *ansibler.AnsiblePlaybookOptions
+	Execute(conn *ansibler.AnsiblePlaybookConnectionOptions,
+		inventory *ansibler.AnsiblePlaybookOptions, path, prefix string) error
 }
 
 // SetConn ...
