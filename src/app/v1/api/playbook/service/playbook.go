@@ -1,6 +1,8 @@
 package service
 
 import (
+	"os"
+
 	"github.com/sofyan48/remora/src/app/v1/utility/ansible"
 )
 
@@ -18,15 +20,15 @@ func PlaybookServiceHandler() *PlaybookService {
 
 // PlaybookServiceInterface ...
 type PlaybookServiceInterface interface {
-	PlaybookService(conn, inventory string) error
+	PlaybookService(app, conn, inventory string) error
 }
 
 // PlaybookService ...
-func (service *PlaybookService) PlaybookService(conn, inventory string) error {
+func (service *PlaybookService) PlaybookService(app, conn, inventory string) error {
 	connection := service.Ansible.SetConn(conn)
 	invent := service.Ansible.SetInventory(inventory)
-
-	err := service.Ansible.Execute(connection, invent, "playbook/example/example.yml", "Runn Example")
-
+	playbookStorage := os.Getenv("PLAYBOOK_PATH")
+	playbookPath := playbookStorage + "/" + app
+	err := service.Ansible.Execute(connection, invent, playbookPath, "Runn Example")
 	return err
 }
