@@ -1,9 +1,7 @@
 package entity
 
-import "time"
-
-// PlaybookResponse ...
-type PlaybookResponse struct {
-	Status    string     `json:"status"`
-	CreatedAt *time.Time `json:"created_at"`
+// PlaybookParameters  ...
+type PlaybookParameters struct {
+	Inventory  string `json:"inventory"`
+	Connection string `json:"connection"`
 }
