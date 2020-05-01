@@ -1,8 +1,10 @@
 package service
 
 import (
+	"errors"
 	"os"
 
+	"github.com/sofyan48/remora/src/app/v1/api/playbook/entity"
 	"github.com/sofyan48/remora/src/app/v1/utility/ansible"
 )
 
@@ -20,15 +22,21 @@ func PlaybookServiceHandler() *PlaybookService {
 
 // PlaybookServiceInterface ...
 type PlaybookServiceInterface interface {
-	PlaybookService(app, conn, inventory string) error
+	PlaybookService(params *entity.PlaybookParameters) (string, error)
 }
 
 // PlaybookService ...
-func (service *PlaybookService) PlaybookService(app, conn, inventory string) error {
-	connection := service.Ansible.SetConn(conn)
-	invent := service.Ansible.SetInventory(inventory)
+func (service *PlaybookService) PlaybookService(params *entity.PlaybookParameters) (string, error) {
+	connection := service.Ansible.SetConn(params.Connection)
+	invent := service.Ansible.SetInventory(params.Inventory)
 	playbookStorage := os.Getenv("PLAYBOOK_PATH")
-	playbookPath := playbookStorage + "/" + app
-	err := service.Ansible.Execute(connection, invent, playbookPath, "Runn Example")
-	return err
+	playbookPath := playbookStorage + "/" + params.Apps + "/main.yml"
+	if playbookStorage == "" {
+		return "nil", errors.New("Setup playbook Path Storage")
+	}
+	if params.Report == "1" {
+		return "Playbook Processing", service.Ansible.Execute(connection, invent, playbookPath, "")
+	}
+	go service.Ansible.Execute(connection, invent, playbookPath, "")
+	return "Playbook Processing", nil
 }

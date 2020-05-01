@@ -1,2 +1,0 @@
-[server]
-10.30.3.34	ansible_hostname=server_host ansible_status=master ansible_ssh_private_key_file=./private.pem 
